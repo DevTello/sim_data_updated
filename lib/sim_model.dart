@@ -1,14 +1,19 @@
 class SimData {
   final List<SimCard> cards;
+  
   SimData(this.cards);
 
-  static SimData fromJson(data) {
+  factory SimData.fromJson(Map<String, dynamic> data) {
     return SimData(data['cards'] != null && data['cards'] is List
-        ? data['cards']
-            .map<SimCard>((_card) => SimCard.fromJson(_card))
+        ? List<dynamic>.from(data['cards'])
+            .map<SimCard>((card) => SimCard.fromJson(card))
             .toList()
         : []);
   }
+
+  Map<String, dynamic> toJson() => {
+    'cards': cards.map((card) => card.toJson()).toList(),
+  };
 }
 
 class SimCard {
@@ -37,18 +42,32 @@ class SimCard {
       this.subscriptionId,
       this.phoneNumber);
 
-  static SimCard fromJson(dynamic card) {
+  factory SimCard.fromJson(Map<String, dynamic> card) {
     return SimCard(
-        card['carrierName'],
-        card['countryCode'],
-        card['displayName'],
-        card['isDataRoaming'],
-        card['isNetworkRoaming'],
-        card['mcc'],
-        card['mnc'],
-        card['slotIndex'],
-        card['serialNumber'],
-        card['subscriptionId'],
-        card['phoneNumber']);
+        card['carrierName'] ?? '',
+        card['countryCode'] ?? '',
+        card['displayName'] ?? '',
+        card['isDataRoaming'] ?? false,
+        card['isNetworkRoaming'] ?? false,
+        card['mcc'] ?? 0,
+        card['mnc'] ?? 0,
+        card['slotIndex'] ?? 0,
+        card['serialNumber'] ?? '',
+        card['subscriptionId'] ?? 0,
+        card['phoneNumber'] ?? '');
   }
+  
+  Map<String, dynamic> toJson() => {
+    'carrierName': carrierName,
+    'countryCode': countryCode,
+    'displayName': displayName,
+    'isDataRoaming': isDataRoaming,
+    'isNetworkRoaming': isNetworkRoaming,
+    'mcc': mcc,
+    'mnc': mnc,
+    'slotIndex': slotIndex,
+    'serialNumber': serialNumber,
+    'subscriptionId': subscriptionId,
+    'phoneNumber': phoneNumber,
+  };
 }

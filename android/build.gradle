@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.3.0'
     }
 }
 
@@ -22,7 +22,8 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
+    namespace 'com.vincentkammerer.sim_data'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -31,5 +32,10 @@ android {
 
     defaultConfig {
         minSdkVersion 23
+        targetSdkVersion 33
+    }
+    
+    lintOptions {
+        disable 'InvalidPackage'
     }
 }

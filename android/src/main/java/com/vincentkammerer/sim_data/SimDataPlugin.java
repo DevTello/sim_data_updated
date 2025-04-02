@@ -17,7 +17,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,11 +35,6 @@ public class SimDataPlugin implements FlutterPlugin, MethodCallHandler, Activity
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     this.initialize(flutterPluginBinding.getBinaryMessenger(),
         flutterPluginBinding.getApplicationContext());
-  }
-
-  public static void registerWith(Registrar registrar) {
-    SimDataPlugin instance = new SimDataPlugin();
-    instance.initialize(registrar.messenger(), registrar.context());
   }
 
   private void initialize(BinaryMessenger messenger, Context context) {
